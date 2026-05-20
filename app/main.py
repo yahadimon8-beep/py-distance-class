@@ -4,11 +4,9 @@ from typing import Union
 
 class Distance:
     def __init__(self, km: Union[int, float]) -> None:
-        # зберігаємо як float, але для друку будемо форматувати
         self.km: float = float(km)
 
     def __str__(self) -> str:
-        # якщо число ціле → показуємо без ".0"
         if self.km.is_integer():
             return f"Distance: {int(self.km)} kilometers."
         return f"Distance: {self.km} kilometers."
@@ -35,20 +33,25 @@ class Distance:
         return Distance(round(result, 2))
 
     def __lt__(self, other: Union[Distance, int, float]) -> bool:
-        return self.km < (other.km if isinstance(other, Distance) else float(other))
+        other_km = other.km if isinstance(other, Distance) else float(other)
+        return self.km < other_km
 
     def __gt__(self, other: Union[Distance, int, float]) -> bool:
-        return self.km > (other.km if isinstance(other, Distance) else float(other))
+        other_km = other.km if isinstance(other, Distance) else float(other)
+        return self.km > other_km
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Distance):
             return self.km == other.km
         if isinstance(other, (int, float)):
             return self.km == float(other)
-        return False
+        return NotImplemented
 
     def __le__(self, other: Union[Distance, int, float]) -> bool:
-        return self.km <= (other.km if isinstance(other, Distance) else float(other))
+        other_km = other.km if isinstance(other, Distance) else float(other)
+        return self.km <= other_km
 
     def __ge__(self, other: Union[Distance, int, float]) -> bool:
-        return self.km >= (other.km if isinstance(other, Distance) else float(other))
+        other_km = other.km if isinstance(other, Distance) else float(other)
+        return self.km >= other_km
+    
