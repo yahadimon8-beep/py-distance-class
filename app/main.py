@@ -54,4 +54,3 @@ class Distance:
     def __ge__(self, other: Union[Distance, int, float]) -> bool:
         other_km = other.km if isinstance(other, Distance) else float(other)
         return self.km >= other_km
-    
